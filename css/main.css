@@ -43,3 +43,12 @@ main{
 	opacity: .5;
 	transition: opacity ease-in 500ms;
 }
+#highest-level a:before{
+	content:"Highest Level : ";
+}
+#highest-level{
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    font-size:1.5em;
+}

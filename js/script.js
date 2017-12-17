@@ -5,6 +5,7 @@ let simonIndex = 0;
 let level = 1;
 let displaySimonSpeed = 1000;
 let levelLabel = document.getElementsByClassName("level-wrapper")[0].getElementsByTagName("a")[0];
+let highestLvlLabel = document.getElementById("highest-level").getElementsByTagName("a")[0]
 var random = function(min, max) {
     return Math.floor((Math.random() * max) + min);
 }
@@ -37,6 +38,7 @@ function handleTileClick() {
 }
 
 function simonSays(offset) {
+	storage();
     levelLabel.innerText = level;
     simonIndex = 0;
     let t = random(0, tiles.length || offset);
@@ -81,4 +83,17 @@ function resetGame() {
 window.onload = function() {
     addListeners();
     simonSays();
+}
+function storage(){
+	let highestLvl = parseInt(localStorage.getItem("memory-highscore"));
+	if(isNaN(highestLvl)){
+		localStorage.setItem("memory-highscore","0");
+	}else{
+		if(level > highestLvl){
+			localStorage.setItem("memory-highscore",level);
+			highestLvlLabel.innerText = level;
+		}else{
+			highestLvlLabel.innerText = highestLvl;
+		}
+	}
 }

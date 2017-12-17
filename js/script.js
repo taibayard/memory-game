@@ -28,7 +28,7 @@ function handleTileClick() {
                 console.log("tile matched");
                 simonIndex++;
             } else {
-                console.warn("tile didnt match");
+                resetGame();
             }
         }
     } else {
@@ -36,14 +36,14 @@ function handleTileClick() {
     }
 }
 
-function simonSays() {
-	levelLabel.innerText = level;
+function simonSays(offset) {
+    levelLabel.innerText = level;
     simonIndex = 0;
-    let t = random(0, tiles.length);
+    let t = random(0, tiles.length || offset);
     let tile_color = tiles[t].getAttribute("id").replace("-tile", "");
     if (tile_color === simon[simon.length - 1]) {
-    	console.log("colors matched picking new one");
-        simonSays();
+        console.log("colors matched picking new one");
+        simonSays(t);
     } else {
         simon.push(tile_color);
         console.log(simon);
@@ -70,6 +70,13 @@ function displaySimonSays() {
             canPickTile = true;
         }
     }, displaySimonSpeed)
+}
+
+function resetGame() {
+    alert("game over");
+    level = 1;
+    simon = [];
+    simonSays();
 }
 window.onload = function() {
     addListeners();

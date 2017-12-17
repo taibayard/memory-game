@@ -12,12 +12,23 @@ var random = function(min, max) {
 
 function addListeners() {
     for (let i = 0; i < tiles.length; i++) {
-        tiles[i].addEventListener("click", handleTileClick)
+        tiles[i].addEventListener("click", handleTileClick);
+        tiles[i].addEventListener("mouseover", function() {
+            if (canPickTile === true) {
+                this.style.opacity = "1";
+            }
+        });
+        tiles[i].addEventListener("mouseout", function() {
+            if (canPickTile === true) {
+                this.style.opacity = ".5";
+            }
+        });
     }
 }
 
 function handleTileClick() {
     if (canPickTile === true) {
+    	this.style.opacity = ".5";
         let tile_color = this.id.replace("-tile", "");
         let simon_color = simon[simonIndex];
         if (simonIndex === simon.length - 1 && tile_color === simon_color) {
@@ -38,7 +49,8 @@ function handleTileClick() {
 }
 
 function simonSays(offset) {
-	storage();
+	canPickTile = false;
+    storage();
     levelLabel.innerText = level;
     simonIndex = 0;
     let t = random(0, tiles.length || offset);
@@ -83,16 +95,17 @@ window.onload = function() {
     addListeners();
     simonSays();
 }
-function storage(){
-	let highestLvl = parseInt(localStorage.getItem("memory-highscore"));
-	if(isNaN(highestLvl)){
-		localStorage.setItem("memory-highscore","0");
-	}else{
-		if(level > highestLvl){
-			localStorage.setItem("memory-highscore",level);
-			highestLvlLabel.innerText = level;
-		}else{
-			highestLvlLabel.innerText = highestLvl;
-		}
-	}
+
+function storage() {
+    let highestLvl = parseInt(localStorage.getItem("memory-highscore"));
+    if (isNaN(highestLvl)) {
+        localStorage.setItem("memory-highscore", "0");
+    } else {
+        if (level > highestLvl) {
+            localStorage.setItem("memory-highscore", level);
+            highestLvlLabel.innerText = level;
+        } else {
+            highestLvlLabel.innerText = highestLvl;
+        }
+    }
 }

@@ -1,0 +1,45 @@
+html,body{
+	margin:0;
+	width:100%;
+	height:100%;
+}
+.level-wrapper{
+	margin-top:5em;
+	width:100%;
+	text-align: center;
+}
+.level-wrapper a:before{
+	content:"Level : ";
+}
+.level-wrapper a{
+	font-size: 3.5em;
+}
+main{
+	margin-top: 4em;
+}
+.tile{
+	width: 250px;
+	height: 250px;
+	display: inline-block;
+	margin: 1em;
+	cursor: pointer;
+}
+#blue-tile{
+	background-color:blue;
+}
+#green-tile{
+	background-color:green;
+}
+#red-tile{
+	background-color:red;
+}
+#orange-tile{
+	background-color: #ffa700;
+}
+#yellow-tile{
+	background-color: yellow;
+}
+#red-tile,#blue-tile,#green-tile,#orange-tile,#yellow-tile{
+	opacity: .5;
+	transition: opacity ease-in 500ms;
+}

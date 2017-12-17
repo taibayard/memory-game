@@ -20,7 +20,7 @@ function handleTileClick() {
     if (canPickTile === true) {
         let tile_color = this.id.replace("-tile", "");
         let simon_color = simon[simonIndex];
-        if (simonIndex === simon.length - 1) {
+        if (simonIndex === simon.length - 1 && tile_color === simon_color) {
             canPickTile = false;
             level++;
             simonSays();
@@ -58,7 +58,6 @@ function displaySimonSays() {
         let previous_tile = simon[simonIndex - 1];
         let current_tile = simon[simonIndex];
         if (simonIndex < level) {
-            console.log("timeout loop");
             if (document.getElementById(previous_tile + "-tile") != null) {
                 document.getElementById(previous_tile + "-tile").style.opacity = ".5";
                 document.getElementById(current_tile + "-tile").style.opacity = "1";

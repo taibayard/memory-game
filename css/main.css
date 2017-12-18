@@ -42,7 +42,10 @@ main{
 }
 #red-tile,#blue-tile,#green-tile,#orange-tile,#yellow-tile{
 	opacity: .5;
-	transition: opacity ease-in 500ms;
+	box-shadow: "none";
+	transform: scale(1);
+	transition: all ease-in 500ms;
+
 }
 #highest-level a:before{
 	content:"Highest Level : ";

@@ -15,11 +15,15 @@ function addListeners() {
         tiles[i].addEventListener("click", handleTileClick);
         tiles[i].addEventListener("mouseover", function() {
             if (canPickTile === true) {
+                this.style.boxShadow = "0px 0px 15px 3px grey";
+                this.style.transform = "scale(1.05)";
                 this.style.opacity = "1";
             }
         });
         tiles[i].addEventListener("mouseout", function() {
             if (canPickTile === true) {
+                this.style.boxShadow = "none";
+                this.style.transform = "scale(1)";
                 this.style.opacity = ".5";
             }
         });
@@ -28,7 +32,9 @@ function addListeners() {
 
 function handleTileClick() {
     if (canPickTile === true) {
-    	this.style.opacity = ".5";
+        this.style.boxShadow = "none";
+        this.style.transform = "scale(1)";
+        this.style.opacity = ".5";
         let tile_color = this.id.replace("-tile", "");
         let simon_color = simon[simonIndex];
         if (simonIndex === simon.length - 1 && tile_color === simon_color) {
@@ -49,7 +55,7 @@ function handleTileClick() {
 }
 
 function simonSays(offset) {
-	canPickTile = false;
+    canPickTile = false;
     storage();
     levelLabel.innerText = level;
     simonIndex = 0;
@@ -71,13 +77,21 @@ function displaySimonSays() {
         let current_tile = simon[simonIndex];
         if (simonIndex < level) {
             if (document.getElementById(previous_tile + "-tile") != null) {
+                document.getElementById(previous_tile + "-tile").style.boxShadow = "none";
+                document.getElementById(previous_tile + "-tile").style.transform = "scale(1)";
                 document.getElementById(previous_tile + "-tile").style.opacity = ".5";
+                document.getElementById(current_tile + "-tile").style.boxShadow = "0px 0px 15px 3px grey";
+                document.getElementById(current_tile + "-tile").style.transform = "scale(1.05)";
                 document.getElementById(current_tile + "-tile").style.opacity = "1";
             }
+            document.getElementById(current_tile + "-tile").style.boxShadow = "0px 0px 15px 3px grey";
+            document.getElementById(current_tile + "-tile").style.transform = "scale(1.05)";
             document.getElementById(current_tile + "-tile").style.opacity = "1";
             simonIndex++;
             displaySimonSays();
         } else {
+            document.getElementById(previous_tile + "-tile").style.boxShadow = "none";
+            document.getElementById(previous_tile + "-tile").style.transform = "scale(1)";
             document.getElementById(previous_tile + "-tile").style.opacity = ".5";
             simonIndex = 0;
             canPickTile = true;
